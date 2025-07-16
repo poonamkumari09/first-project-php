@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* CSS */
+.slider-container {
+  position: relative;
+  max-width: 1000px;
+  margin: auto;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.slider-images {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slider-img {
+  display: none;
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+}
+
+.slider-img.active {
+  display: block;
+}
+
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 10px;
+  font-size: 24px;
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  cursor: pointer;
+  z-index: 1;
+  border-radius: 50%;
+}
+
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.7);
+}
+
+.prev {
+  left: 20px;
+}
+
+.next {
+  right: 20px;
+}
+
+    </style>
+</head>
+<body>
+    <!-- HTML -->
+<div class="slider-container">
+    <div class="slider-images">
+      <img src="images/homeSlide.jpg" alt="Goa" class="slider-img active">
+      <img src="images/homeSlide1.jpg" alt="Mountains" class="slider-img">
+      <img src="images/homeSlide3.jpg" alt="City Tour" class="slider-img">
+      <!-- <img src="images/adventure.jpg" alt="Adventure" class="slider-img"> -->
+    </div>
+    <button class="prev" onclick="changeSlide(-1)">❮</button>
+    <button class="next" onclick="changeSlide(1)">❯</button>
+  </div>
+  <script>
+    // JavaScript
+let slideIndex = 0;
+const slides = document.querySelectorAll('.slider-img');
+
+function showSlide(index) {
+  slides.forEach((slide, i) => {
+    slide.classList.remove('active');
+    if (i === index) {
+      slide.classList.add('active');
+    }
+  });
+}
+
+function changeSlide(n) {
+  slideIndex += n;
+  if (slideIndex < 0) slideIndex = slides.length - 1;
+  if (slideIndex >= slides.length) slideIndex = 0;
+  showSlide(slideIndex);
+}
+
+// Show the first image initially
+showSlide(slideIndex);
+
+  </script>
+</body>
+</html>
